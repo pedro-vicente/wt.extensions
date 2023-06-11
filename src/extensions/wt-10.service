@@ -1,0 +1,16 @@
+[Unit]
+Description=wt10
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/home/pvn/services/wt.extensions/wt-4.0.3/build/examples/test_extensions/test_extensions.wt \
+--http-address=0.0.0.0 --http-port=8010 --docroot=. \
+-t 10 \
+-d /home/pvn/services/wt.extensions/wt-4.0.3/examples/test_extensions/data/us_presidential_election_results_by_county.csv  \
+-g /home/pvn/services/wt.extensions/wt-4.0.3/examples/test_extensions/data/us.topojson
+User=pvn
+
+[Install]
+WantedBy=multi-user.target
+

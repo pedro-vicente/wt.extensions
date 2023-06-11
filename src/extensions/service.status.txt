@@ -1,0 +1,11 @@
+sudo systemctl status sqlite-server.service
+sudo systemctl status wt-atms.service
+sudo systemctl status wt-celsium_dc311.service
+sudo systemctl status wt-elliot.service
+sudo systemctl status wt-leaflet_dc311.service
+sudo systemctl status wt-leaflet_ep.service
+sudo systemctl status wt-leaflet_states.service
+sudo systemctl status wt-schools.service
+sudo systemctl status wt-us.service
+sudo systemctl status wt-celsium_atms.service
+

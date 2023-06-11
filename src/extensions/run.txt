@@ -1,0 +1,4 @@
+/home/pvn/wt.extensions/wt-4.0.3/build/examples/test_extensions/test_extensions.wt \
+--http-address=0.0.0.0 --http-port=8082  --docroot=. \
+-t 4 \
+-d ../../../examples/test_extensions/data/TATMS_npp_d20141130_t1817273_e1817589_b16023_c20141201005810987954_noaa_ops.h5.star.json

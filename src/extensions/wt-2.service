@@ -1,0 +1,16 @@
+[Unit]
+Description=wtdc311
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/home/pvn/services/wt.extensions/wt-4.0.3/build/examples/test_extensions/test_extensions.wt \
+--http-address=0.0.0.0 --http-port=8082  --docroot=. \
+-t 2 \
+-d /home/pvn/services/wt.extensions/wt-4.0.3/examples/test_extensions/data/dc_311-2016.csv.s0311.csv \
+-g /home/pvn/services/wt.extensions/wt-4.0.3/examples/test_extensions/data/ward-2012.geojson \
+-c /home/pvn/services/wt.extensions/wt-4.0.3/build/examples/test_extensions/wt_config.xml
+User=pvn
+
+[Install]
+WantedBy=multi-user.target
