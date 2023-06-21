@@ -12,6 +12,7 @@ message(STATUS "WT_ROOT: " ${WT_ROOT})
 message(STATUS "Source directory is " ${CMAKE_SOURCE_DIR})
 message(STATUS "Build directory is " ${CMAKE_CURRENT_BINARY_DIR})
 
+set (CMAKE_CXX_STANDARD 14)
 if (MSVC)
   include_directories(${CMAKE_SOURCE_DIR}/build/boost_1_82_0/include/boost-1_82)
 else()
