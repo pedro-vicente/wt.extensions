@@ -4,17 +4,11 @@ mkdir -p build
 pushd build
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
-u="$USER"
-if [[ "$u" != "root" ]] ;
-then
- cmake .. -DWT_INCLUDE=/home/pvn/wt_install/include -DWT_CONFIG_H=/home/pvn/wt_install/include 
-else
- cmake .. -DWT_ROOT=ON -DWT_INCLUDE=/root/wt_install/include -DWT_CONFIG_H=/root/wt_install/include 
-fi
+cmake .. -DWT_INCLUDE=/home/pvn/wt_install/include -DWT_CONFIG_H=/home/pvn/wt_install/include
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 
-cmake .. -DWT_INCLUDE=/Users/pvn/wt_install/include -DWT_CONFIG_H=/Users/pvn/wt_install/include 
+cmake .. -DWT_INCLUDE=/Users/pvn/wt_install/include -DWT_CONFIG_H=/Users/pvn/wt_install/include
 
 elif [[ "$OSTYPE" == "msys" ]]; then
 
@@ -28,7 +22,7 @@ pwd
 
 if [[ "$OSTYPE" != "msys" ]]; then
 pushd build
-export LD_LIBRARY_PATH=/home/pvn/git/nostr_client_relay/ext/boost_1_82_0/stage/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/home/pvn/github/wt.extensions/ext/boost_1_82_0/stage/lib:$LD_LIBRARY_PATH
 ./test_extensions --http-address=0.0.0.0 --http-port=8081  --docroot=. -t 2 -d dc_311-2016.csv.s0311.csv -g ward-2012.geojson
 popd
 fi
