@@ -16,7 +16,47 @@ Wt.extensions adds use of several popular Javascript libraries:
 
 ![image](https://user-images.githubusercontent.com/6119070/44011818-d6f8543e-9e88-11e8-9995-6a1ad707e005.png)
 
-# Examples
+## Building 
+
+### Install dependencies Linux Ubuntu
+
+Install packages with
+
+```
+sudo apt-get install cmake
+sudo apt-get install build-essential
+sudo apt-get install python-dev
+```
+
+### Install dependencies Mac OSX
+
+Install Homebrew
+
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Install packages with
+
+```
+brew install cmake 
+```
+
+Build Boost and Wt with
+
+```bash
+./build.boost.sh 
+./build.wt.sh 
+```
+
+Build Wt.extensions with
+
+```bash
+./build.cmake.sh 
+```
+
+
+## Examples
 
 To run all the examples, this same set of parameters is used, as typical for any Wt application
 
@@ -122,34 +162,6 @@ http://www.eden-earth.org:8090/
 
 ```
 ./test_extensions --http-address=0.0.0.0 --http-port=8080  --docroot=. -t 10 -d DJI_2018_minor.3600.txt
-```
-
-# Building Wt.extensions
-
-## Install dependencies
-
-### Linux Ubuntu
-
-Install packages with
-
-```
-sudo apt-get install cmake
-sudo apt-get install build-essential
-sudo apt-get install python-dev
-```
-
-### Mac OSX
-
-Install Homebrew
-
-```
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-Install packages with
-
-```
-brew install cmake 
 ```
 
 # APIs
