@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.20)
 set(CMAKE_BUILD_TYPE Debug)
 project (wt.extensions)
 
@@ -8,10 +8,12 @@ message(STATUS "WT_INCLUDE: " ${WT_INCLUDE})
 message(STATUS "WT_CONFIG_H: " ${WT_CONFIG_H})
 message(STATUS "BOOST_INCLUDE_DIR: " ${BOOST_INCLUDE_DIR})
 message(STATUS "BOOST_LIB_DIRS: " ${BOOST_LIB_DIRS})
+message(STATUS "BOOST_INCLUDE_ASIO_DIR: " ${BOOST_INCLUDE_ASIO_DIR})
 
 set (CMAKE_CXX_STANDARD 14)
 
 include_directories(${BOOST_INCLUDE_DIR})
+include_directories(${BOOST_INCLUDE_ASIO_DIR})
 include_directories(${WT_INCLUDE})
 include_directories(${WT_CONFIG_H})
 include_directories(${CMAKE_SOURCE_DIR}/gason/src)
@@ -44,7 +46,6 @@ set(src ${src} ${CMAKE_SOURCE_DIR}/gason/src/gason.cpp)
 
 add_executable(test_chart src/chart/test_chart.cc src/chart/chart_model.cc src/chart/chart_model.hh ${src})
 add_executable(test_extensions src/extensions/test_extensions.cc src/extensions/test_geojson.cc src/extensions/test_atms.cc ${src})
-add_executable(test_feed src/feed/test_feed.cc)
 
 #//////////////////////////
 #link with libraries
@@ -63,8 +64,13 @@ endif()
 
 if(UNIX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -Wno-deprecated-declarations")
-  message(STATUS "Compiler flags: ${CMAKE_CXX_FLAGS}")
 endif()
+
+if(APPLE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations -Wno-deprecated-copy -Wno-deprecated-copy-dtor")
+endif()
+
+message(STATUS "Compiler flags: ${CMAKE_CXX_FLAGS}")
 
 #//////////////////////////
 # LINUX
@@ -89,17 +95,16 @@ if (MSVC)
 endif()
 
 if(APPLE)
-  set(lib_dep ${lib_dep} /Users/pvn/wt_install/lib/libwt.dylib)
-  set(lib_dep ${lib_dep} /Users/pvn/wt_install/lib/libwthttp.dylib)
+  set(lib_dep ${lib_dep} ${CMAKE_CURRENT_SOURCE_DIR}/install/wt/lib/libwt.dylib)
+  set(lib_dep ${lib_dep} ${CMAKE_CURRENT_SOURCE_DIR}/install/wt/lib/libwthttp.dylib)
   set(lib_dep ${lib_dep} ${BOOST_LIB_DIRS}/libboost_filesystem.a)
   set(lib_dep ${lib_dep} ${BOOST_LIB_DIRS}/libboost_thread.a)
   set(lib_dep ${lib_dep} ${BOOST_LIB_DIRS}/libboost_program_options.a)
 endif()
 
 if (LINUX)
-  set(lib_dep ${lib_dep} /home/pvn/wt_install/lib/libwt.so)
-  set(lib_dep ${lib_dep} /home/pvn/wt_install/lib/libwthttp.so)
-  set(BOOST_LIB_DIRS /home/pvn/git/wt.extensions/ext/boost_1_88_0/stage/lib)
+  set(lib_dep ${lib_dep} ${CMAKE_CURRENT_SOURCE_DIR}/install/wt/lib/libwt.so)
+  set(lib_dep ${lib_dep} ${CMAKE_CURRENT_SOURCE_DIR}/install/wt/lib/libwthttp.so)
   set(lib_dep ${lib_dep} ${BOOST_LIB_DIRS}/libboost_filesystem.so)
   set(lib_dep ${lib_dep} ${BOOST_LIB_DIRS}/libboost_thread.so)
   set(lib_dep ${lib_dep} ${BOOST_LIB_DIRS}/libboost_program_options.so)
@@ -112,13 +117,6 @@ endif()
 message(STATUS "lib_dep: " ${lib_dep})
 target_link_libraries (test_chart ${lib_dep})
 target_link_libraries (test_extensions ${lib_dep})
-target_link_libraries (test_feed ${lib_dep})
-
-file(COPY "${CMAKE_SOURCE_DIR}/src/nostro.css" DESTINATION ${CMAKE_BINARY_DIR})
-
-message(STATUS "Copying resources to: ${CMAKE_BINARY_DIR}")
-file(COPY "${CMAKE_SOURCE_DIR}/src/nostro.css" DESTINATION ${CMAKE_BINARY_DIR})
-add_custom_target(css SOURCES ${CMAKE_BINARY_DIR}/nostro.css)
 
 message(STATUS "Copying data files to: ${CMAKE_BINARY_DIR}")
 file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/leaflet.js" DESTINATION ${CMAKE_BINARY_DIR})
