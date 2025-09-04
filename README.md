@@ -118,14 +118,18 @@ The county boundaries is read from .geoJSON files and shown as polygons.
 
 ### demo
 
-http://www.eden-earth.org:8086/
+http://nostro.cloud:8010/
 
 ![image](https://user-images.githubusercontent.com/6119070/44007562-1102ae0e-9e66-11e8-8b0a-b2da71e7b83a.png)
 
 ### run
 
 ```
-./test_extensions --http-address=0.0.0.0 --http-port=8080  --docroot=. -t 6 -d montgomery_county_schools.csv -g montgomery_county_boundary.json  -m wmata_stations.json -z md_maryland_zip_codes_geo.min.json
+./test_extensions --http-address=0.0.0.0 --http-port=8080  --docroot=. -t 6 \
+-d montgomery_county_schools.csv \
+-g montgomery_county_boundary.json  \
+-m wmata_stations.json \
+-z md_maryland_zip_codes_geo.min.json
 ```
 
 ## US states (Leaflet)

@@ -1,0 +1,24 @@
+[Unit]
+Description=wt8
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+LimitCORE=infinity
+WorkingDirectory=/home/pvn/services/wt.extensions/build
+Environment="LD_LIBRARY_PATH=/home/pvn/nostr_client_relay/ext/boost_1_88_0/stage/lib"
+
+ExecStart=/home/pvn/services/wt.extensions/build/test_extensions --http-address=0.0.0.0 --http-port=8086 -t 6 \
+ -d /home/pvn/services/wt.extensions/build/montgomery_county_schools.csv \
+ -g /home/pvn/services/wt.extensions/build/montgomery_county_boundary.json \
+ -m /home/pvn/services/wt.extensions/build/wmata_stations.json \
+ -z /home/pvn/services/wt.extensions/build/md_maryland_zip_codes_geo.min.json \
+ -c /home/pvn/services/wt.extensions/install/wt/etc/wt/wt_config.xml \
+ --docroot=/home/pvn/services/wt.extensions/build/ \
+ --resources-dir=/home/pvn/services/wt.extensions/build/ \
+ --accesslog=/home/pvn/services/wt.extensions/build/wt.log.txt
+User=pvn
+
+[Install]
+WantedBy=multi-user.target
+
