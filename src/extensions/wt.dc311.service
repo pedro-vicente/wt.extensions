@@ -1,0 +1,20 @@
+[Unit]
+Description=wt.dc311
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+LimitCORE=infinity
+WorkingDirectory=/home/pvn/nostr_client_relay/build/web
+Environment="LD_LIBRARY_PATH=/home/pvn/nostr_client_relay/ext/boost_1_88_0/stage/lib"
+
+ExecStart=/home/pvn/services/wt.extensions/build/test_extensions --http-address=0.0.0.0 --http-port=8081 -t 2 \
+ -d /home/pvn/services/wt.extensions/build/dc_311-2016.csv.s0311.csv \
+ -g /home/pvn/services/wt.extensions/build/ward-2012.geojson \
+ --docroot=/home/pvn/services/wt.extensions/build/ \
+ --resources-dir=/home/pvn/services/wt.extensions/build/ \
+ --accesslog=/home/pvn/services/wt.extensions/build/wt.log.txt
+User=pvn
+
+[Install]
+WantedBy=multi-user.target

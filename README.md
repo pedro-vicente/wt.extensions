@@ -84,7 +84,7 @@ Washington [DC311](https://311.dc.gov/) code (rodent complaints) occurrences for
 
 ### demo
 
-http://www.eden-earth.org:8082/
+http://nostro.cloud:8081/
 
 ![image](https://user-images.githubusercontent.com/6119070/43999560-a7e11336-9ddc-11e8-9319-5bc278b19d5b.png)
 
