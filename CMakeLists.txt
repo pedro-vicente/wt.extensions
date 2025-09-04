@@ -47,10 +47,19 @@ set(src ${src} ${CMAKE_SOURCE_DIR}/gason/src/gason.cpp)
 add_executable(test_chart src/chart/test_chart.cc src/chart/chart_model.cc src/chart/chart_model.hh ${src})
 add_executable(test_extensions src/extensions/test_extensions.cc src/extensions/test_geojson.cc src/extensions/test_atms.cc ${src})
 
+if (MSVC)
+  set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_extensions)
+  set_property(TARGET test_extensions PROPERTY 
+    VS_DEBUGGER_COMMAND_ARGUMENTS "--http-address=0.0.0.0 --http-port=8080  --docroot=. -t 2 -d dc_311-2016.csv.s0311.csv -g ward-2012.geojson")
+  set_property(TARGET test_extensions PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+endif()
+
+
 #//////////////////////////
-#link with libraries
-#lib_dep contains a cascade definition of all the libraries needed to link
+# link with libraries
+# lib_dep contains a cascade definition of all the libraries needed to link
 #//////////////////////////
+
 
 set(lib_dep ${lib_dep})
 
@@ -119,7 +128,7 @@ target_link_libraries (test_chart ${lib_dep})
 target_link_libraries (test_extensions ${lib_dep})
 
 message(STATUS "Copying data files to: ${CMAKE_BINARY_DIR}")
-file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/leaflet.js" DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/leaflet-src.js" DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/dc_311-2016.csv.s0311.csv" DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/ward-2012.geojson" DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/montgomery_county_schools.csv" DESTINATION ${CMAKE_BINARY_DIR})

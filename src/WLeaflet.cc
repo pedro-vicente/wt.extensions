@@ -89,7 +89,7 @@ namespace Wt
     this->addCssRule(".legend", "text-align: left; line-height: 18px; color: #555;");
     this->addCssRule(".legend i", "width: 18px; height: 18px; float: left; margin-right: 8px;");
     WApplication* app = WApplication::instance();
-    std::string leaflet = "leaflet.js";
+    std::string leaflet = "leaflet-src.js";
     std::string mapbox_gl = "mapbox-gl.js";
     std::string leaflet_mapbox_gl = "leaflet-mapbox-gl.js";
 
@@ -110,9 +110,6 @@ namespace Wt
       app->useStyleSheet("leaflet.css");
       app->useStyleSheet("mapbox-gl.css");
 
-      leaflet = "leaflet.js";
-      mapbox_gl = "mapbox-gl.js";
-      leaflet_mapbox_gl = "leaflet-mapbox-gl.js";
     }
     else
     {
