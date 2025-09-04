@@ -127,12 +127,28 @@ message(STATUS "lib_dep: " ${lib_dep})
 target_link_libraries (test_chart ${lib_dep})
 target_link_libraries (test_extensions ${lib_dep})
 
-message(STATUS "Copying data files to: ${CMAKE_BINARY_DIR}")
+#//////////////////////////
+# data files 
+#//////////////////////////
+
+message(STATUS "Copying Leaflet source to: ${CMAKE_BINARY_DIR}")
 file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/leaflet-src.js" DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/dc_311-2016.csv.s0311.csv" DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/ward-2012.geojson" DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/montgomery_county_schools.csv" DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/montgomery_county_boundary.json" DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/wmata_stations.json" DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/md_maryland_zip_codes_geo.min.json" DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/data/TATMS_npp_d20141130_t1817273_e1817589_b16023_c20141201005810987954_noaa_ops.h5.star.json" DESTINATION ${CMAKE_BINARY_DIR})
+
+message(STATUS "Copying data files to: ${CMAKE_BINARY_DIR}")
+set(DATA_FILES
+  "data/dc_311-2016.csv.s0311.csv"
+  "data/ward-2012.geojson"
+  "data/montgomery_county_schools.csv"
+  "data/montgomery_county_boundary.json"
+  "data/wmata_stations.json"
+  "data/md_maryland_zip_codes_geo.min.json"
+  "data/TATMS_npp_d20141130_t1817273_e1817589_b16023_c20141201005810987954_noaa_ops.h5.star.json"
+  "data/gz_2010_us_040_00_20m.json"
+  "data/us.topojson"
+  "data/us_presidential_election_results_by_county.csv"
+)
+
+message(STATUS "Copying data files to: ${CMAKE_BINARY_DIR}")
+foreach(DATA_FILE ${DATA_FILES})
+  file(COPY "${CMAKE_SOURCE_DIR}/${DATA_FILE}" DESTINATION ${CMAKE_BINARY_DIR})
+endforeach()
