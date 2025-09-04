@@ -118,7 +118,7 @@ The county boundaries is read from .geoJSON files and shown as polygons.
 
 ### demo
 
-http://nostro.cloud:8010/
+http://nostro.cloud:8086/
 
 ![image](https://user-images.githubusercontent.com/6119070/44007562-1102ae0e-9e66-11e8-8b0a-b2da71e7b83a.png)
 
