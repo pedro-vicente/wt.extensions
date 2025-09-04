@@ -1,0 +1,21 @@
+[Unit]
+Description=wt8
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+LimitCORE=infinity
+WorkingDirectory=/home/pvn/services/wt.extensions/build
+Environment="LD_LIBRARY_PATH=/home/pvn/nostr_client_relay/ext/boost_1_88_0/stage/lib"
+
+ExecStart=/home/pvn/services/wt.extensions/build/test_extensions --http-address=0.0.0.0 --http-port=8088 -t 8 \
+ -d /home/pvn/services/wt.extensions/build/TATMS_npp_d20141130_t1817273_e1817589_b16023_c20141201005810987954_noaa_ops.h5.star.json \
+ -c /home/pvn/services/wt.extensions/install/wt/etc/wt/wt_config.xml \
+ --docroot=/home/pvn/services/wt.extensions/build/ \
+ --resources-dir=/home/pvn/services/wt.extensions/build/ \
+ --accesslog=/home/pvn/services/wt.extensions/build/wt.log.txt
+User=pvn
+
+[Install]
+WantedBy=multi-user.target
+

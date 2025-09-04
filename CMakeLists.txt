@@ -134,6 +134,9 @@ target_link_libraries (test_extensions ${lib_dep})
 message(STATUS "Copying Leaflet source to: ${CMAKE_BINARY_DIR}")
 file(COPY "${CMAKE_SOURCE_DIR}/src/extensions/leaflet-src.js" DESTINATION ${CMAKE_BINARY_DIR})
 
+message(STATUS "Copying wt_config.xml to: ${CMAKE_SOURCE_DIR}/install/wt/etc/wt)")
+file(COPY "${CMAKE_SOURCE_DIR}/service/wt_config.xml" DESTINATION ${CMAKE_SOURCE_DIR}/install/wt/etc/wt)
+
 message(STATUS "Copying data files to: ${CMAKE_BINARY_DIR}")
 set(DATA_FILES
   "data/dc_311-2016.csv.s0311.csv"

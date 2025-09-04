@@ -93,6 +93,23 @@ http://nostro.cloud:8081/
 ```
 ./test_extensions --http-address=0.0.0.0 --http-port=8081  --docroot=. -t 2 -d dc_311-2016.csv.s0311.csv -g ward-2012.geojson
 ```
+## US Presidential elections by county (Leaflet)
+
+This example shows the 2016 Presidential elections by county
+
+### demo
+
+http://nostro.cloud:8010/
+
+![image](https://github.com/user-attachments/assets/b0242dc1-c76e-4994-8179-77ace4aa603e)
+
+### run
+
+```
+./test_extensions --http-address=0.0.0.0 --http-port=8080  --docroot=. -t 10 \
+ -d us_presidential_election_results_by_county.csv  \
+ -g us.topojson \
+```
 
 ## Montgomery County schools (Leaflet)
 
@@ -138,7 +155,7 @@ This example shows HDF5 ATMS data (converted to JSON)
 
 ### demo
 
-http://www.eden-earth.org:8089/
+http://nostro.cloud:8088
 
 ![image](https://user-images.githubusercontent.com/6119070/43999577-fd5093fa-9ddc-11e8-9260-63967958197e.png)
 

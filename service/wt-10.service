@@ -1,0 +1,22 @@
+[Unit]
+Description=wt10
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+LimitCORE=infinity
+WorkingDirectory=/home/pvn/services/wt.extensions/build
+Environment="LD_LIBRARY_PATH=/home/pvn/nostr_client_relay/ext/boost_1_88_0/stage/lib"
+
+ExecStart=/home/pvn/services/wt.extensions/build/test_extensions --http-address=0.0.0.0 --http-port=8010 -t 10 \
+ -d /home/pvn/services/wt.extensions/build/us_presidential_election_results_by_county.csv  \
+ -g /home/pvn/services/wt.extensions/build/us.topojson \
+ -c /home/pvn/services/wt.extensions/install/wt/etc/wt/wt_config.xml \
+ --docroot=/home/pvn/services/wt.extensions/build/ \
+ --resources-dir=/home/pvn/services/wt.extensions/build/ \
+ --accesslog=/home/pvn/services/wt.extensions/build/wt.log.txt
+User=pvn
+
+[Install]
+WantedBy=multi-user.target
+
