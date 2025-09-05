@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-
 remote=$(git config --get remote.origin.url)
 echo "remote repository: $remote"
  
@@ -12,24 +11,27 @@ else
 fi
 
 sleep 2
-
+mkdir -p build/boost_1_88_0
 pushd ext
 pushd boost_1_88_0
 
 if [[ "$OSTYPE" == "msys" ]]; then
 ./bootstrap.bat
-./b2 --prefix=../../build/boost_1_88_0  --layout=versioned --toolset=msvc-14.3 address-model=64 architecture=x86 variant=debug threading=multi link=static runtime-link=shared \
+./b2 --prefix=../../build/boost_1_88_0  --layout=versioned --toolset=msvc-14.3 address-model=64 architecture=x86 variant=debug threading=multi \
+  link=static runtime-link=shared \
 --build-dir=../../build/boost_1_88_0 --with-atomic --with-date_time --with-filesystem --with-program_options --with-regex --with-thread --with-chrono install
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 
-./bootstrap.sh --prefix=`pwd`
-./b2 --prefix=`pwd` variant=release --with-atomic --with-date_time --with-filesystem --with-program_options --with-regex --with-thread --with-chrono 
+./bootstrap.sh
+./b2 --prefix=../../build/boost_1_88_0 --layout=versioned variant=release threading=multi link=static runtime-link=shared \
+--build-dir=../../build/boost_1_88_0 --with-atomic --with-date_time --with-filesystem --with-program_options --with-regex --with-thread --with-chrono install
 
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
 ./bootstrap.sh
-./b2 --prefix=. variant=release --with-atomic --with-date_time --with-filesystem --with-program_options --with-regex --with-thread --with-chrono 
+./b2 --prefix=../../build/boost_1_88_0 --layout=versioned variant=release threading=multi link=static runtime-link=shared \
+--build-dir=../../build/boost_1_88_0 cxxflags=-fPIC --with-atomic --with-date_time --with-filesystem --with-program_options --with-regex --with-thread --with-chrono install
 
 fi
 
